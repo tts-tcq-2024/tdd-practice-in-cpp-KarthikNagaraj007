@@ -1,7 +1,12 @@
-#include <iostream>
-#include <math.h>
-using namespace std;
+#ifndef STRINGCALCULATOR_H
+#define STRINGCALCULATOR_H
+
+#include <string>
 
 class StringCalculator {
-    int add(string numbers);
+public:
+    int add(const std::string& input);
 };
+
+#endif // STRINGCALCULATOR_H
+
