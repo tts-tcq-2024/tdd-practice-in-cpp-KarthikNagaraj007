@@ -4,4 +4,4 @@ using namespace std;
 
 class StringCalculator {
     int add(string numbers);
-}
+};
