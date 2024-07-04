@@ -36,6 +36,11 @@ TEST(StringCalculatorAddTests, ExpectZeroForEmptyInput) {
 //         }, std::runtime_error);
 // }
 
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
+
 // TEST(StringCalculatorAddTests, ExpectSumWithNewlineDelimiter) {
 //     int expectedresult = 6;
 //     std::string input = "1\n2,3";
