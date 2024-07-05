@@ -10,60 +10,55 @@ TEST(StringCalculatorAddTests, ExpectZeroForEmptyInput) {
     ASSERT_EQ(result, expectedresult);
 }
 
-// TEST(StringCalculatorAddTests, ExpectZeroForSingleZero) {
-//     int expectedresult = 0;
-//     std::string input = "0";
-//     StringCalculator objUnderTest;
-//     int result = objUnderTest.add(input);
+TEST(StringCalculatorAddTests, ExpectZeroForSingleZero) {
+    int expectedresult = 0;
+    std::string input = "0";
+    StringCalculator objUnderTest;
+    int result = objUnderTest.add(input);
 
-//     ASSERT_EQ(result, expectedresult);
-// }
-
-// TEST(StringCalculatorAddTests, ExpectSumForTwoNumbers) {
-//     int expectedresult = 3;
-//     std::string input = "1,2";
-//     StringCalculator objUnderTest;
-//     int result = objUnderTest.add(input);
-
-//     ASSERT_EQ(result, expectedresult);
-// }
-
-// TEST(StringCalculatorAddTests, ExpectExceptionForNegativeNumbers) {
-//     ASSERT_THROW({
-//         std::string input = "-1,2";
-//         StringCalculator objUnderTest;
-//        objUnderTest.add(input);
-//         }, std::runtime_error);
-// }
-
-int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
+    ASSERT_EQ(result, expectedresult);
 }
 
-// TEST(StringCalculatorAddTests, ExpectSumWithNewlineDelimiter) {
-//     int expectedresult = 6;
-//     std::string input = "1\n2,3";
-//      StringCalculator objUnderTest;
-//     int result =objUnderTest.add(input);
+TEST(StringCalculatorAddTests, ExpectSumForTwoNumbers) {
+    int expectedresult = 3;
+    std::string input = "1,2";
+    StringCalculator objUnderTest;
+    int result = objUnderTest.add(input);
 
-//     ASSERT_EQ(result, expectedresult);
-// }
+    ASSERT_EQ(result, expectedresult);
+}
 
-// TEST(StringCalculatorAddTests, IgnoreNumbersGreaterThan1000) {
-//     int expectedresult = 1;
-//     std::string input = "1,1001";
-//     StringCalculator objUnderTest;
-//     int result =objUnderTest.add(input);
+TEST(StringCalculatorAddTests, ExpectExceptionForNegativeNumbers) {
+    ASSERT_THROW({
+        std::string input = "-1,2";
+        StringCalculator objUnderTest;
+       objUnderTest.add(input);
+        }, std::runtime_error);
+}
 
-//     ASSERT_EQ(result, expectedresult);
-// }
+TEST(StringCalculatorAddTests, ExpectSumWithNewlineDelimiter) {
+    int expectedresult = 6;
+    std::string input = "1\n2,3";
+     StringCalculator objUnderTest;
+    int result =objUnderTest.add(input);
 
-// TEST(StringCalculatorAddTests, ExpectSumWithCustomDelimiter) {
-//     int expectedresult = 3;
-//     std::string input = "//;\n1;2";
-//     StringCalculator objUnderTest;
-//     int result = objUnderTest.add(input);
+    ASSERT_EQ(result, expectedresult);
+}
 
-//     ASSERT_EQ(result, expectedresult);
-// }
+TEST(StringCalculatorAddTests, IgnoreNumbersGreaterThan1000) {
+    int expectedresult = 1;
+    std::string input = "1,1001";
+    StringCalculator objUnderTest;
+    int result =objUnderTest.add(input);
+
+    ASSERT_EQ(result, expectedresult);
+}
+
+TEST(StringCalculatorAddTests, ExpectSumWithCustomDelimiter) {
+    int expectedresult = 3;
+    std::string input = "//;\n1;2";
+    StringCalculator objUnderTest;
+    int result = objUnderTest.add(input);
+
+    ASSERT_EQ(result, expectedresult);
+}
