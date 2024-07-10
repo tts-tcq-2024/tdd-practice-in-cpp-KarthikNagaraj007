@@ -1,67 +1,61 @@
 #include "StringCalculator.h"
-#include <stdexcept>
 #include <sstream>
-#include <regex>
+#include <algorithm>
 
-// Convert a string to an integer.
-int StringCalculator::convertStringToInt(const std::string& str) {
-    return std::stoi(str);
+
+int StringCalculator::sumTwoNumbers(const std::string& input) {
+    std::istringstream stream(input);
+    std::string number;
+    int sum = 0;
+    while (std::getline(stream, number, ',')) {
+        int num = std::stoi(number);
+        if (num <=1000) {
+         sum += num;
+        }
+    }
+    return sum;
 }
 
-// Sum two integers.
-int StringCalculator::sumTwoNumbers(int a, int b) {
-    return a + b;
-}
-
-// Check if a number is negative and throw an exception if it is.
-void StringCalculator::checkNegative(int num) {
-    if (num < 0) {
-        throw std::runtime_error("Negatives not allowed: " + std::to_string(num));
+void StringCalculator::checkNegative(const std::string& input) {
+    std::istringstream stream(input);
+    std::string number;
+    while (std::getline(stream, number, ',')) {
+        if (std::stoi(number) < 0) {
+            throw std::runtime_error("Negative numbers not allowed");
+        }
     }
 }
 
-// Handle custom delimiter from the input string.
-std::string StringCalculator::handleCustomDelimiter(const std::string& numbers) {
-    if (numbers.substr(0, 2) == "//") {
-        size_t delimiterEnd = numbers.find("\n");
-        return numbers.substr(delimiterEnd + 1);
+int StringCalculator::add(const std::string& input) {
+  if (input.empty()) {
+        return 0;
     }
-    return numbers;
-}
-
-// Get delimiters from the input string if custom delimiters are specified.
-std::string StringCalculator::getDelimiters(const std::string& numbers) {
-    if (numbers.substr(0, 2) == "//") {
-        size_t delimiterEnd = numbers.find("\n");
-        return numbers.substr(2, delimiterEnd - 2);
-    }
-    return ",\n";
-}
-
-// Main add function to sum up numbers from the input string.
-int StringCalculator::add(const std::string& numbers) {
-    if (numbers.empty()) {
+   if (input == "0") {
         return 0;
     }
 
-    std::string numStr = handleCustomDelimiter(numbers);
-    std::string delimiters = getDelimiters(numbers);
-    std::regex re("[" + delimiters + "]");
-    std::sregex_token_iterator it(numStr.begin(), numStr.end(), re, -1);
-    std::sregex_token_iterator reg_end;
-
-    int sum = 0;
-
-    for (; it != reg_end; ++it) {
-        std::string token = it->str();
-        if (!token.empty()) {
-            int num = convertStringToInt(token);
-            checkNegative(num);
-            if (num <= 1000) {
-                sum = sumTwoNumbers(sum, num);
-            }
-        }
-    }
-
-    return sum;
+  std::string filteredinput = getDelimiters(input);
+  filteredinput = handleCustomDelimiter(filteredinput);
+  checkNegative(filteredinput);
+  return sumTwoNumbers(filteredinput);  
+    
 }
+
+std::string StringCalculator::handleCustomDelimiter(const std::string& input) {
+    std::string result = input;
+    std::replace(result.begin(), result.end(), '\n', ',');
+    return result;
+}
+
+std::string StringCalculator::getDelimiters(const std::string& input) {
+    if (input.substr(0, 2) == "//") {
+        std::string delimiter = input.substr(2, input.find('\n') - 2);
+        std::string rest = input.substr(input.find('\n') + 1);
+        std::replace(rest.begin(), rest.end(), delimiter[0], ',');
+        return rest;
+    }
+    return input;
+}
+
+
+
